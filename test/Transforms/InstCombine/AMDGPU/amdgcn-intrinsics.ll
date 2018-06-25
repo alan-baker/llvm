@@ -1355,6 +1355,27 @@ define float @fmed3_0_1_nan_f32() {
   ret float %med
 }
 
+; CHECK-LABEL: @fmed3_undef_0_1_f32(
+; CHECK: ret float 0.0
+define float @fmed3_undef_0_1_f32() {
+  %med3 = call float @llvm.amdgcn.fmed3.f32(float undef, float 0.0, float 1.0)
+  ret float %med3
+}
+
+; CHECK-LABEL: @fmed3_0_undef_1_f32(
+; CHECK: ret float 0.0
+define float @fmed3_0_undef_1_f32() {
+  %med = call float @llvm.amdgcn.fmed3.f32(float 0.0, float undef, float 1.0)
+  ret float %med
+}
+
+; CHECK-LABEL: @fmed3_0_1_undef_f32(
+; CHECK: ret float 1.0
+define float @fmed3_0_1_undef_f32() {
+  %med = call float @llvm.amdgcn.fmed3.f32(float 0.0, float 1.0, float undef)
+  ret float %med
+}
+
 ; --------------------------------------------------------------------
 ; llvm.amdgcn.icmp
 ; --------------------------------------------------------------------
